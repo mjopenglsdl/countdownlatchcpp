@@ -1,20 +1,19 @@
 #ifndef __COUNTDOWNLATCH_NIPUN__
 #define __COUNTDOWNLATCH_NIPUN__
 
-#include <inttypes.h>
-#include <stdint.h>
 #include <mutex>
 #include <condition_variable>
 
 
 namespace clatch 
 {
-    class countdownlatch {
+    class CountdownLatch 
+    {
     public:
         /*! Constructor
-          \param count, the value the countdownlatch object should be initialized with
+          \param count, the value the CountdownLatch object should be initialized with
         */
-        countdownlatch(uint32_t count);
+        CountdownLatch(uint32_t count);
 
 
         /*!
@@ -38,13 +37,13 @@ namespace clatch
 
     private:
         std::condition_variable cv;
-        std::mutex lock;
-        uint32_t count;
+        std::mutex mtx_;
+        uint32_t count_;
         
         // deleted constructors/assignmenet operators
-        countdownlatch() = delete;
-        countdownlatch(const countdownlatch& other) = delete;
-        countdownlatch& operator=(const countdownlatch& opther) = delete;
+        CountdownLatch() = delete;
+        CountdownLatch(const CountdownLatch& other) = delete;
+        CountdownLatch& operator=(const CountdownLatch& opther) = delete;
     };
 }
 
