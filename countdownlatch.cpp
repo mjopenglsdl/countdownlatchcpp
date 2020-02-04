@@ -13,7 +13,10 @@ void clatch::countdownlatch::await(uint64_t nanosecs) {
     if (nanosecs > 0) {
        cv.wait_for(lck, std::chrono::nanoseconds(nanosecs));
     } else {
-       cv.wait(lck);
+
+        while (count > 0){
+            cv.wait(lck);
+        }
     }
 }
 
